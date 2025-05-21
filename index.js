@@ -15,7 +15,7 @@ import OrderRoutes from "./routes/order.route.js"
 const app = express();
 
 app.use(cors({
-  origin: "https://masaladibba.com/",
+  origin: "https://masaladibba.com",
   credentials: true,
 }));
 app.use(express.json());

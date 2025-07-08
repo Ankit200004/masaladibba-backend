@@ -18,6 +18,7 @@ app.use(cors({
   origin: "https://masaladibba.com",
   credentials: true,
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

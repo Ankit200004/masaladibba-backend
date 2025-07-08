@@ -42,7 +42,6 @@
 //   console.log(`🚀 Server running at http://localhost:${PORT}`);
 // });
 
-
 import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
@@ -58,10 +57,10 @@ import OrderRoutes from "./routes/order.route.js";
 
 const app = express();
 
-// ✅ Robust CORS setup
+// ✅ CORS Configuration – THIS MUST COME FIRST
 const allowedOrigins = [
-  "http://localhost:5173",
-  "https://masaladibba.com"
+  "https://masaladibba.com",
+  "http://localhost:5173"
 ];
 
 app.use(cors({
@@ -75,13 +74,14 @@ app.use(cors({
   credentials: true
 }));
 
-app.options("*", cors()); // ✅ handle preflight requests
+app.options("*", cors()); // ✅ Handle preflight requests
 
+// ✅ Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Routes
+// ✅ Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/feature", FeatureRoutes);
@@ -90,13 +90,12 @@ app.use("/api/address", AddressRoutes);
 app.use("/api/orders", OrderRoutes);
 
 app.get("/", (req, res) => {
-  res.send("Welcome to Auth API");
+  res.send("Welcome to MasalaDibba API");
 });
 
+// ✅ Start Server
 const PORT = process.env.PORT || 3000;
-
 connectToDB();
-
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
